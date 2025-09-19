@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import Create from './componentes/Create'
-import ListContatos from './componentes/ListContatos'
+import Create from './componentes/create'
+import ListContatos from './componentes/listContatos'
 import Search from './componentes/Search'
 import './App.css'
 
