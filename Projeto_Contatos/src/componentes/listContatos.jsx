@@ -1,9 +1,10 @@
+import { formatarNumber } from "../validarContatos"
 const ListContatos = ({contato, removeContato,editContato})=>{
     return(
         <div>
             <div>
-                <p>Nome:{contato.name}</p>
-                <p>Número:{contato.number}</p>
+                <h3>Nome:{contato.name}</h3>
+                <p>Número: {formatarNumber(contato.number)}</p>
             </div>
             <div>
                 <button onClick={()=>editContato(contato.id)}>editar</button>

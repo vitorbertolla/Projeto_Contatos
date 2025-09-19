@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Create from './componentes/create'
 import ListContatos from './componentes/listContatos'
 import Search from './componentes/Search'
+import { validarNumber, formatarNumber } from './validarContatos'
 import './theme.css'
 import './global.css'
 
@@ -12,38 +13,48 @@ function App() {
 
   const addContato = (name, number) =>{
 
+    // valida o número
+    if(!validarNumber(number)){
+      alert("Número Inválido")
+      return false
+    }
+
+    // formata o número
+    const numberFormatado = formatarNumber(number)
+
+
     
     if(ContatosEdit){
-      const edit = Contatos.map((contato) => contato.id === ContatosEdit.id ?
+      const update = Contatos.map((contato) => contato.id === ContatosEdit.id ?
     // essa linha copia todas as propriedades do contato e sobrescrevem com as novas propriedades 
-    {...contato, name, number}
+    {...contato, name, number: numberFormatado}
     :contato)
 
-    setContatos(edit)
+    setContatos(update)
     setEdit(null)
     }else{
     // o some percorre todos os elementos e devolve true ou false
     const numeroExiste = Contatos.some(
-    (contato) => contato.number === number)
+    (contato) => contato.number === numberFormatado)
     if (numeroExiste){
       alert("Número já adicionado na sua lista de Contatos ")
-      return
+      return false
     }
       
       const newContato = {
       id: Date.now(),
       name: name, 
-      number: number
+      number: numberFormatado
     }
     setContatos([...Contatos, newContato])
     }
-
+    return true
 
 
   }
 
   const removeContato = (id) => {
-    const atualizada = Contatos.filter((contato) => contato.id != id)
+    const atualizada = Contatos.filter((contato) => contato.id !== id)
     setContatos(atualizada)
   }
 
@@ -57,7 +68,9 @@ function App() {
   const searchContato = () => {
     if(!ContatosSearch) return Contatos
     return Contatos.filter((contato) => contato.name.toLowerCase().includes(ContatosSearch.toLowerCase())
+    || contato.number.replace(/\D/g, "").includes(ContatosSearch)
     || contato.number.includes(ContatosSearch) )
+    // para poder pesquisar com ele formatado ou não
   }
 
 

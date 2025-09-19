@@ -19,7 +19,8 @@ const Create = ({addContato, ContatosEdit}) => {
     useEffect(() =>{
         if(ContatosEdit){
             setName(ContatosEdit.name)
-            setNumber(ContatosEdit.number)
+            setNumber(ContatosEdit.number.replace(/\D/g, "")) 
+            // esse replace tira tudo que não for digito (/\D) por vazio (/g)
         }else{
             setName("")
             setNumber("")
@@ -32,10 +33,12 @@ const Create = ({addContato, ContatosEdit}) => {
         e.preventDefault()
         if(!name || !number) return
         else{
-            addContato(name,number)
+            const sucess = addContato(name,number)
+            if(sucess){
+            setName("")
+            setNumber("")
         }
-        setName("")
-        setNumber("")
+        }
 
     }
 
