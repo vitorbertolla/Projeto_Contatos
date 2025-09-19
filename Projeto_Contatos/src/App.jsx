@@ -3,6 +3,8 @@ import Create from './componentes/Create'
 import ListContatos from './componentes/ListContatos'
 import Search from './componentes/Search'
 import './App.css'
+import './theme.css'
+import './global.css'
 
 function App() {
   const [Contatos, setContatos] = useState([])
@@ -63,7 +65,7 @@ function App() {
 
 
   return (
-    <div>
+    <div className='container'>
 
       <div>
         <Create 
