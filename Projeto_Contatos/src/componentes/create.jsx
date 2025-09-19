@@ -1,6 +1,17 @@
 import { useState, useEffect } from "react"
 
 const Create = ({addContato, ContatosEdit}) => {
+    
+    // to mexendo é pra limitar o numero pra 11 caracteres
+    // const HandleChange = (event) => {
+    //     const value = event.target.value
+        
+    //     const onlyNumbers = value.replace(/\D/g, '')
+
+    //     if (onlyNumbers.length <= 11) {
+    //         setNumber(prev=> ({...prev, phone: onlyNumbers}))
+    //     }   
+    // }
 
     const[name, setName] = useState("")
     const[number, setNumber] = useState("")
@@ -33,7 +44,7 @@ const Create = ({addContato, ContatosEdit}) => {
             <h1>Adicionar Contato</h1>
             <form onSubmit={Submit}>
                 <input type="text" placeholder="Nome:" value={name} onChange={(e) => setName(e.target.value)}/>
-                <input type="number" placeholder="Número:"value={number} onChange={(e) => setNumber(e.target.value)}/>
+                <input type="number" placeholder="Número:"value={number} onChange={(e) => HandleChange(e.target.value)}/>
                 <button type="submit">{ContatosEdit ? "Salvar Alterações" :"Adicionar Contato" }</button>
             </form>
     </div>
