@@ -1,7 +1,21 @@
-import { useState } from "react"
-const Create = ({addContato}) => {
+import { useState, useEffect } from "react"
+
+const Create = ({addContato, ContatosEdit}) => {
+
     const[name, setName] = useState("")
     const[number, setNumber] = useState("")
+
+    useEffect(() =>{
+        if(ContatosEdit){
+            setName(ContatosEdit.name)
+            setNumber(ContatosEdit.number)
+        }else{
+            setName("")
+            setNumber("")
+        }
+        
+    }, [ContatosEdit])
+    // essse é o array de dependência do useEffect para falar quando ele deve rodar (toda vez que o ContatoEdit mudar) sem ele o useeffect fica rodando toda hora e não da para atualizar
 
     const Submit = async(e) =>{
         e.preventDefault()
@@ -20,8 +34,7 @@ const Create = ({addContato}) => {
             <form onSubmit={Submit}>
                 <input type="text" placeholder="Nome:" value={name} onChange={(e) => setName(e.target.value)}/>
                 <input type="number" placeholder="Número:"value={number} onChange={(e) => setNumber(e.target.value)}/>
-                <button type="submit">Adicionar</button>
-                <button type="button">Editar</button>
+                <button type="submit">{ContatosEdit ? "Salvar Alterações" :"Adicionar Contato" }</button>
             </form>
     </div>
     )
