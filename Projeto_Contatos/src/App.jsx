@@ -12,13 +12,6 @@ function App() {
 
   const addContato = (name, number) =>{
 
-    // o some percorre todos os elementos e devolve true ou false
-    const numeroExiste = Contatos.some(
-    (contato) => contato.number === number)
-    if (numeroExiste){
-      alert("Número já adicionado na sua lista de Contatos ")
-      return
-    }
     
     if(ContatosEdit){
       const edit = Contatos.map((contato) => contato.id === ContatosEdit.id ?
@@ -29,6 +22,13 @@ function App() {
     setContatos(edit)
     setEdit(null)
     }else{
+    // o some percorre todos os elementos e devolve true ou false
+    const numeroExiste = Contatos.some(
+    (contato) => contato.number === number)
+    if (numeroExiste){
+      alert("Número já adicionado na sua lista de Contatos ")
+      return
+    }
       
       const newContato = {
       id: Date.now(),

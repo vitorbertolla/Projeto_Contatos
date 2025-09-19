@@ -44,7 +44,7 @@ const Create = ({addContato, ContatosEdit}) => {
             <h1>Adicionar Contato</h1>
             <form onSubmit={Submit}>
                 <input type="text" placeholder="Nome:" value={name} onChange={(e) => setName(e.target.value)}/>
-                <input type="number" placeholder="Número:"value={number} onChange={(e) => HandleChange(e.target.value)}/>
+                <input type="number" placeholder="Número:"value={number} onChange={(e) => setNumber(e.target.value)}/>
                 <button type="submit">{ContatosEdit ? "Salvar Alterações" :"Adicionar Contato" }</button>
             </form>
     </div>
