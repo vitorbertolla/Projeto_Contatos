@@ -5,6 +5,8 @@ import Search from './componentes/Search'
 import { validarNumber, formatarNumber } from './validarContatos'
 import './theme.css'
 import './global.css'
+import './buttonAdd.css'
+import './inputValores.css'
 
 function App() {
   const [Contatos, setContatos] = useState([])

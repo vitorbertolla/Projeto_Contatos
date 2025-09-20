@@ -41,19 +41,37 @@ const Create = ({ addContato, ContatosEdit }) => {
     <div className="container-add">
       <h1>Adicionar Contato</h1>
       <form onSubmit={Submit}>
-        <input
-          type="text"
-          placeholder="Nome:"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Número:"
-          value={number}
-          onChange={handleNumberChange}
-        />
-        <button type="submit">
+        <div className="form-control">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <label>
+            <span style={{ transitionDelay: "0ms" }}>N</span>
+            <span style={{ transitionDelay: "60ms" }}>o</span>
+            <span style={{ transitionDelay: "120ms" }}>m</span>
+            <span style={{ transitionDelay: "180ms" }}>e</span>
+          </label>
+        </div>
+        <div className="form-control">
+          <input
+            type="text"
+            value={number}
+            onChange={handleNumberChange}
+            required
+          />
+          <label>
+            <span style={{ transitionDelay: "0ms" }}>N</span>
+            <span style={{ transitionDelay: "60ms" }}>ú</span>
+            <span style={{ transitionDelay: "120ms" }}>m</span>
+            <span style={{ transitionDelay: "180ms" }}>e</span>
+            <span style={{ transitionDelay: "180ms" }}>r</span>
+            <span style={{ transitionDelay: "180ms" }}>o</span>
+          </label>
+        </div>
+        <button className="buttonAdd" type="submit">
           {ContatosEdit ? "Salvar Alterações" : "Adicionar Contato"}
         </button>
       </form>
