@@ -8,9 +8,9 @@ const ListContatos = ({contato, removeContato,editContato, setNumeroMensagem})=>
                 <p>{formatarNumber(contato.number)}</p>
             </div>
             <div className="list-contato-actions">
+                <button className="button mensagem" onClick={() => setNumeroMensagem(contato.number)}>Mensagem</button>
                 <button className="button editar" onClick={() => editContato(contato.id)}>Editar</button>
                 <button className="button excluir" onClick={() => removeContato(contato.id)}>X</button>
-                <button className="button mensagem" onClick={() => setNumeroMensagem(contato.number)}>Mensagem</button>
             </div>
         </div>
 
