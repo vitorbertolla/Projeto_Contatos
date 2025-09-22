@@ -8,6 +8,7 @@ import './theme.css'
 import './global.css'
 import './buttonAdd.css'
 import './inputValores.css'
+import './listContatos.css'
 
 function App() {
   const [Contatos, setContatos] = useState([])
@@ -110,7 +111,7 @@ function App() {
         setSearch={setSearch}/>
       </div>
 
-      <div>
+      <div className='containerList'>
           {searchContato().map ((contato)=>(
             <ListContatos 
             key = {contato.id}

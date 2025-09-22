@@ -1,17 +1,19 @@
 import { formatarNumber } from "../validarContatos"
 const ListContatos = ({contato, removeContato,editContato, setNumeroMensagem})=>{
-    return(
-        <div>
-            <div>
-                <h3>Nome:{contato.name}</h3>
-                <p>Número: {formatarNumber(contato.number)}</p>
+    
+    return (
+        <div className="list-contato">
+            <div className="list-contato-info">
+                <h3>{contato.name}</h3>
+                <p>{formatarNumber(contato.number)}</p>
             </div>
-            <div>
-                <button onClick={()=>editContato(contato.id)}>editar</button>
-                <button onClick={()=>removeContato(contato.id)}>X</button>
-                <button onClick={()=>setNumeroMensagem(contato.number)}>Mensagem</button>
+            <div className="list-contato-actions">
+                <button className="button editar" onClick={() => editContato(contato.id)}>Editar</button>
+                <button className="button excluir" onClick={() => removeContato(contato.id)}>X</button>
+                <button className="button mensagem" onClick={() => setNumeroMensagem(contato.number)}>Mensagem</button>
             </div>
         </div>
+
     )
     
 }

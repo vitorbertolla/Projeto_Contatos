@@ -10,8 +10,9 @@ body{
     justify-content: center;
     width: 100vw;
     margin-top: 10vh;
-    background-image: url(https://i.pinimg.com/474x/85/70/f6/8570f6339d3189c96e340d47a581d3b8.jpg);
-    
+    background: 
+    linear-gradient(rgba(0, 150, 0, 0.4), rgba(0, 160, 0, 0.4)),
+    url("https://i.pinimg.com/originals/34/8f/c9/348fc9806e32bba0fb4c42e799ddf880.jpg");
 }
 
 form{
@@ -27,16 +28,19 @@ h1{
     margin-bottom: 20px;
 }
 
-.container{
-    height: 80vh;
+.container {
+    min-height: 80vh;
     width: 35vw;
     background-color: var(--branco);
     box-shadow: rgba(0, 0, 0, 0.123) 1px 1px 10px;
     display: flex;
-    flex-flow: column wrap;
+    flex-direction: column;
     align-items: center;
     border-radius: 2rem;
+    padding: 1rem;
+    margin-bottom: 10vh;
 }
+
 
 .container-add{
     margin: 2rem;
@@ -44,4 +48,11 @@ h1{
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
+}
+
+.containerList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

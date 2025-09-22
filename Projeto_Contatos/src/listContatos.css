@@ -1,0 +1,73 @@
+.list-contato {
+  background-color: var(--branco);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 27.5vw;
+  box-shadow: rgba(0, 0, 0, 0.08) 1px 1px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-contato:hover {
+  transform: scale(1.02);
+  box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 10px;
+}
+
+.list-contato-info p {
+  font-size: 0.9rem;
+  color: var(--verde-5);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.list-contato-info h3 {
+  color: var(--verde-2);
+  font-size: 1.2rem;
+}
+
+.list-contato-info p {
+  font-size: 0.9rem;
+  color: var(--verde-5);
+}
+
+.list-contato-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.list-contato-actions .button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--branco);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-contato-actions .button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.list-contato-actions .button.editar {
+    background: transparent;
+  border: var(--verde-1) solid 3px;
+  color: var(--verde-2);
+}
+
+.list-contato-actions .button.excluir {
+        background: var(--verde-1);
+
+}
+
+.list-contato-actions .button.mensagem {
+      background: transparent;
+  border: var(--verde-1) solid 3px;
+  color: var(--verde-2);
+}
