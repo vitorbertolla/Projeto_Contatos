@@ -1,5 +1,5 @@
 import { formatarNumber } from "../validarContatos"
-const ListContatos = ({contato, removeContato,editContato})=>{
+const ListContatos = ({contato, removeContato,editContato, setNumeroMensagem})=>{
     return(
         <div>
             <div>
@@ -9,6 +9,7 @@ const ListContatos = ({contato, removeContato,editContato})=>{
             <div>
                 <button onClick={()=>editContato(contato.id)}>editar</button>
                 <button onClick={()=>removeContato(contato.id)}>X</button>
+                <button onClick={()=>setNumeroMensagem(contato.number)}>Mensagem</button>
             </div>
         </div>
     )

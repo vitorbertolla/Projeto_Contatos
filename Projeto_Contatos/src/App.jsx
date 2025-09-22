@@ -3,6 +3,7 @@ import Create from './componentes/create'
 import ListContatos from './componentes/listContatos'
 import Search from './componentes/Search'
 import { validarNumber, formatarNumber } from './validarContatos'
+import Message from './componentes/Message'
 import './theme.css'
 import './global.css'
 import './buttonAdd.css'
@@ -12,6 +13,9 @@ function App() {
   const [Contatos, setContatos] = useState([])
   const [ContatosEdit, setEdit] = useState(null)
   const [ContatosSearch, setSearch] = useState('')
+  const [link, setLink] = useState("") 
+  const [numeroMensagem, setNumeroMensagem] = useState("")
+
 
   const addContato = (name, number) =>{
 
@@ -75,12 +79,25 @@ function App() {
     // para poder pesquisar com ele formatado ou não
   }
 
+  const enviarMensagem = (numeroMensagem, mensagem) =>{
+    const numeroLimpo = numeroMensagem.replace(/\D/g, "")
+    const novoLink = `https://wa.me/${numeroLimpo}?text=${encodeURIComponent(mensagem)}`
+    setLink(novoLink)
+    return true
+  }
 
 
 
   return (
     <div className='container'>
-
+      <div>
+        <Message
+        enviarMensagem={enviarMensagem}
+        link={link}
+        setNumeroMensagem={setNumeroMensagem}
+        numeroMensagem={numeroMensagem}
+        setLink={setLink} />
+      </div>
       <div>
         <Create 
         addContato={addContato}
@@ -99,7 +116,8 @@ function App() {
             key = {contato.id}
             contato={contato}
             removeContato={removeContato}
-            editContato={editContato}/> 
+            editContato={editContato}
+            setNumeroMensagem={setNumeroMensagem}/> 
           ))
         }
           
