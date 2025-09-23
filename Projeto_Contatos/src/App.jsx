@@ -2,13 +2,15 @@ import { useState } from 'react'
 import Create from './componentes/create'
 import ListContatos from './componentes/listContatos'
 import Search from './componentes/Search'
-import { validarNumber, formatarNumber } from './validarContatos'
+import { validarNumber, formatarNumber } from './componentes/validarContatos'
 import Message from './componentes/Message'
+import enviarPrompt from './IA'
 import './theme.css'
 import './global.css'
 import './buttonAdd.css'
 import './inputValores.css'
 import './listContatos.css'
+
 
 function App() {
   const [Contatos, setContatos] = useState([])
@@ -87,12 +89,22 @@ function App() {
     return true
   }
 
+  const copiarBotao = (link) => {
+    navigator.clipboard.writeText(link)
+    .then(() => alert("Link copiado!"))
+    .catch(err => console.error("Erro ao copiar:", err))
+  }
+
 
 
   return (
     <div className='container'>
       <div>
+        <enviarPrompt/>
+      </div>
+      <div>
         <Message
+        copiarBotao={copiarBotao}
         enviarMensagem={enviarMensagem}
         link={link}
         setNumeroMensagem={setNumeroMensagem}

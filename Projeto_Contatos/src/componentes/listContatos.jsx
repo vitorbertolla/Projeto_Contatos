@@ -1,4 +1,4 @@
-import { formatarNumber } from "../validarContatos"
+import { formatarNumber } from "./validarContatos"
 const ListContatos = ({contato, removeContato,editContato, setNumeroMensagem})=>{
     
     return (

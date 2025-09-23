@@ -4,17 +4,6 @@ const Create = ({ addContato, ContatosEdit }) => {
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
 
-  const handleNumberChange = (event) => {
-    let value = event.target.value
-
-    value = value.replace(/\D/g, "")
-
-    // Limita a 11 caracteres
-    if (value.length <= 11) {
-      setNumber(value)
-    }
-  };
-
   useEffect(() => {
     if (ContatosEdit) {
       setName(ContatosEdit.name);
@@ -57,9 +46,10 @@ const Create = ({ addContato, ContatosEdit }) => {
         </div>
         <div className="form-control">
           <input
+            maxLength="11"
             type="text"
             value={number}
-            onChange={handleNumberChange}
+            onChange={(e) => setNumber(e.target.value)}
             required
           />
           <label>
