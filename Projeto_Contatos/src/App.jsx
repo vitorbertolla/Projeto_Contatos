@@ -4,7 +4,7 @@ import ListContatos from './componentes/listContatos'
 import Search from './componentes/Search'
 import { validarNumber, formatarNumber } from './componentes/validarContatos'
 import Message from './componentes/Message'
-import enviarPrompt from './IA'
+import IA from './componentes/IA'
 import './theme.css'
 import './global.css'
 import './buttonAdd.css'
@@ -18,6 +18,8 @@ function App() {
   const [ContatosSearch, setSearch] = useState('')
   const [link, setLink] = useState("") 
   const [numeroMensagem, setNumeroMensagem] = useState("")
+  const [mostrarIA, setMostrarIA] = useState(false)
+
 
 
   const addContato = (name, number) =>{
@@ -100,10 +102,15 @@ function App() {
   return (
     <div className='container'>
       <div>
-        <enviarPrompt/>
+        {
+          mostrarIA &&(
+            <IA/>
+          )
+        }
       </div>
       <div>
         <Message
+        setMostrarIA={setMostrarIA}
         copiarBotao={copiarBotao}
         enviarMensagem={enviarMensagem}
         link={link}
@@ -119,7 +126,7 @@ function App() {
 
       <div>
         <Search 
-        CotatosSearch={ContatosSearch}
+        ContatosSearch={ContatosSearch}
         setSearch={setSearch}/>
       </div>
 

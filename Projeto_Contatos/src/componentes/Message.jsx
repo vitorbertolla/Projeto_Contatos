@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Message = ({enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao}) =>{
+const Message = ({enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIA}) =>{
     const [mensagem, setMensagem] = useState("")
 
     const Submit = async (e) => {
@@ -24,6 +24,7 @@ const Message = ({enviarMensagem, link, setLink, setNumeroMensagem, numeroMensag
                     <p> Seu link: {link}
                     <button type="button" onClick={() => copiarBotao(link)}>Copiar Link</button></p>
                     <button type="button"><a href={link} target="_blank" rel="noopener noreferrer">Abrir Whatsapp</a></button>
+                    <button onClick={() => setMostrarIA(prev => !prev)}>Gerar com Ia</button>
                 </form>
 
         </div>
