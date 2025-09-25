@@ -6,62 +6,32 @@ const IA = () => {
     const [resposta, setResposta] = useState("");
     const [carregando, setCarregando] = useState(false);
 
- const enviarPrompt = async () => {
-    setCarregando(true);
-    setResposta("");
-
-    const apikey = import.meta.env.VITE_HF_KEY;
-    
-    // NOVO ENDPOINT PADRÃO DE INFERÊNCIA
-    const INFERENCE_URL = "https://api-inference.huggingface.co/models/";
-    
-    // Modelo Gemma (Instruction-Tuned)
-    const MODEL_NAME = "google/gemma-2-2b-it";
-    
-    // Formato de Prompt Específico do Gemma
-    const formattedPrompt = `<start_of_turn>user\n${prompt}<end_of_turn><start_of_turn>model\n`;
+     const SUPABASE_FUNCTION_NAME = 'generate_text';
 
     try {
-        const respostaAPI = await fetch(
-            // Use o endpoint padrão, passando o MODEL_NAME na URL
-            `${INFERENCE_URL}${MODEL_NAME}`, 
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${apikey}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    inputs: formattedPrompt, 
-                    parameters: {
-                        max_new_tokens: 150,
-                        temperature: 0.7,
-                        return_full_text: false 
-                    }
-                }),
-            }
-        );
+        // Chamada Segura para a Edge Function
+        const { data, error } = await supabase.functions.invoke(SUPABASE_FUNCTION_NAME, {
+            method: 'POST',
+            body: { 
+                prompt: prompt // Enviando apenas o prompt
+            },
+        });
 
-        // Se o status NÃO for 200 OK, leia a resposta de erro da API
-        if (!respostaAPI.ok) {
-             const errorData = await respostaAPI.json();
-             // Mostra o erro exato que o servidor do Hugging Face devolveu
-             throw new Error(`Erro ${respostaAPI.status}: ${errorData.error || 'Falha desconhecida.'}`);
+        if (error) {
+            throw new Error(`Erro no Supabase: ${error.message}`);
         }
 
-        const dados = await respostaAPI.json();
-        console.log("Resposta da API:", dados);
-
-        const conteudo = dados?.[0]?.generated_text?.trim() || "Erro: Não foi possível obter o texto gerado.";
+        // Recebe a resposta segura
+        const conteudo = data?.generated_text || "Resposta não formatada da IA.";
         setResposta(conteudo);
 
     } catch (erro) {
-        // Agora você verá a mensagem de erro detalhada da API do Hugging Face
+        // Trata qualquer erro de rede ou do Supabase
         setResposta(`Erro na requisição: ${erro.message}`);
     }
 
     setCarregando(false);
-};
+}
 
     return (
         <div className="ia-container">
