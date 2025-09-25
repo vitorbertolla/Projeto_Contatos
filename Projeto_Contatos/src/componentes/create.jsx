@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Create = ({ addContato, ContatosEdit }) => {
+const Create = ({ addContato, numeroInvalido, ContatosEdit }) => {
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
 
@@ -47,7 +47,7 @@ const Create = ({ addContato, ContatosEdit }) => {
         </div>
         <div className="form-control">
           <input
-            maxLength="11"
+            maxLength="15"
             type="text"
             placeholder="(44) 91234-5678"
             value={number}
@@ -62,6 +62,9 @@ const Create = ({ addContato, ContatosEdit }) => {
             <span style={{ transitionDelay: "240ms" }}>r</span>
             <span style={{ transitionDelay: "300ms" }}>o</span>
           </label>
+          {numeroInvalido &&(
+            <p>Número Inválido</p>
+          )}
         </div>
         <button className="buttonAdd" type="submit">
           {ContatosEdit ? "Salvar Alterações" : "Adicionar Contato"}

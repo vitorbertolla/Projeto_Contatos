@@ -19,7 +19,10 @@ function App() {
   const [ContatosSearch, setSearch] = useState('')
   const [link, setLink] = useState("") 
   const [numeroMensagem, setNumeroMensagem] = useState("")
+  const [mensagem, setMensagem] = useState("")
   const [mostrarIA, setMostrarIA] = useState(false)
+  const [numeroInvalido, setNumeroInvalido] = useState(false)
+
 
 
 
@@ -27,7 +30,10 @@ function App() {
 
     // valida o número
     if(!validarNumber(number)){
-      alert("Número Inválido")
+      setNumeroInvalido(true)
+      setTimeout(() => {
+        setNumeroInvalido(false)
+        }, 3000)
       return false
     }
 
@@ -86,6 +92,12 @@ function App() {
   }
 
   const enviarMensagem = (numeroMensagem, mensagem) =>{
+    if(!validarNumber(numeroMensagem)){
+      setNumeroInvalido(true)
+      setTimeout(() => {
+        setNumeroInvalido(false)
+        }, 3000)
+    return false}
     const numeroLimpo = numeroMensagem.replace(/\D/g, "")
     const novoLink = `https://wa.me/${numeroLimpo}?text=${encodeURIComponent(mensagem)}`
     setLink(novoLink)
@@ -94,8 +106,8 @@ function App() {
 
   const copiarBotao = (link) => {
     navigator.clipboard.writeText(link)
-    .then(() => alert("Link copiado!"))
-    .catch(err => console.error("Erro ao copiar:", err))
+    .then(() => {return true})
+    .catch(err => {return false})
   }
 
 
@@ -104,8 +116,15 @@ function App() {
   <div className="container">
     {/* Coluna esquerda - Gerador de Links */}
     <div className="container-message">
-      {mostrarIA && <IA />}
+      {mostrarIA && (
+        <IA
+        setMensagem={setMensagem}
+        setMostrarIA={setMostrarIA}
+        />)}
       <Message
+        numeroInvalido={numeroInvalido}
+        setMensagem={setMensagem}
+        mensagem={mensagem}
         setMostrarIA={setMostrarIA}
         copiarBotao={copiarBotao}
         enviarMensagem={enviarMensagem}
@@ -113,12 +132,14 @@ function App() {
         setNumeroMensagem={setNumeroMensagem}
         numeroMensagem={numeroMensagem}
         setLink={setLink}
-      />
+        />
     </div>
 
     {/* Coluna direita - Agenda */}
     <div className="container-agenda">
-      <Create addContato={addContato} ContatosEdit={ContatosEdit} />
+      <Create addContato={addContato}
+        ContatosEdit={ContatosEdit} 
+        numeroInvalido={numeroInvalido}/>
       <Search ContatosSearch={ContatosSearch} setSearch={setSearch} />
       <div className="containerList">
         {searchContato().map((contato) => (

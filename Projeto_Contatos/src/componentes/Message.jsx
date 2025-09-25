@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIA }) => {
-  const [mensagem, setMensagem] = useState("");
-
+const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIA,setMensagem, mensagem, numeroInvalido}) => {
+  const[mensagemCopiar, setMensagemCopiar] = useState(false)
   const Submit = async (e) => {
     e.preventDefault();
     if (!numeroMensagem) return;
@@ -19,23 +18,6 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
     <div className="message-container">
       <h1>Gerador de Links</h1>
       <form onSubmit={Submit}>
-        <div className="form-control">
-          <input
-            type="text"
-            value={numeroMensagem}
-            placeholder="(44) 91234-5678"
-            onChange={(e) => setNumeroMensagem(e.target.value)}
-            required
-          />
-          <label>
-            <span style={{ transitionDelay: "0ms" }}>N</span>
-            <span style={{ transitionDelay: "60ms" }}>ú</span>
-            <span style={{ transitionDelay: "120ms" }}>m</span>
-            <span style={{ transitionDelay: "180ms" }}>e</span>
-            <span style={{ transitionDelay: "240ms" }}>r</span>
-            <span style={{ transitionDelay: "300ms" }}>o</span>
-          </label>
-        </div>
 
         <div className="form-control">
         <input
@@ -56,6 +38,28 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
             <span style={{ transitionDelay: "420ms" }}>m</span>
         </label>
         </div>
+        <div className="form-control">
+          <input
+            type="text"
+            value={numeroMensagem}
+            maxLength="15"
+            placeholder="(44) 91234-5678"
+            onChange={(e) => setNumeroMensagem(e.target.value)}
+            required
+          />
+
+          <label>
+            <span style={{ transitionDelay: "0ms" }}>N</span>
+            <span style={{ transitionDelay: "60ms" }}>ú</span>
+            <span style={{ transitionDelay: "120ms" }}>m</span>
+            <span style={{ transitionDelay: "180ms" }}>e</span>
+            <span style={{ transitionDelay: "240ms" }}>r</span>
+            <span style={{ transitionDelay: "300ms" }}>o</span>
+          </label>
+          {numeroInvalido &&(
+            <p>Número Inválido</p>
+          )}
+        </div>
 
         <button className="buttonAdd" type="submit">Preparar Mensagem</button>
 
@@ -64,7 +68,22 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
             <p>Link gerado:</p>
             <input type="text" value={link} readOnly />
             <div className="link-buttons">
-              <button type="button" onClick={() => copiarBotao(link)}>📋</button>
+              {mensagemCopiar &&(
+                <p>{(copiarBotao)? "Copiado com sucesso": "Erro ao copiar"}</p>
+              )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    copiarBotao(link)
+                    setMensagemCopiar(true)
+
+                    setTimeout(() => {
+                      setMensagemCopiar(false)
+                    }, 2000)
+                  }}
+                >
+                  📋
+                </button>
               <a href={link} target="_blank" rel="noopener noreferrer">
                 <button type="button">Abrir WhatsApp</button>
               </a>
