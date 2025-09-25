@@ -28,12 +28,13 @@ const Create = ({ addContato, ContatosEdit }) => {
 
   return (
     <div className="container-add">
-      <h1>Adicionar Contato</h1>
+      <h1>Agenda de Contatos</h1>
       <form onSubmit={Submit}>
         <div className="form-control">
           <input
             type="text"
             value={name}
+            placeholder="Digite o nome do contato"
             onChange={(e) => setName(e.target.value)}
             required
           />
@@ -48,6 +49,7 @@ const Create = ({ addContato, ContatosEdit }) => {
           <input
             maxLength="11"
             type="text"
+            placeholder="(44) 91234-5678"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
             required
@@ -57,8 +59,8 @@ const Create = ({ addContato, ContatosEdit }) => {
             <span style={{ transitionDelay: "60ms" }}>ú</span>
             <span style={{ transitionDelay: "120ms" }}>m</span>
             <span style={{ transitionDelay: "180ms" }}>e</span>
-            <span style={{ transitionDelay: "180ms" }}>r</span>
-            <span style={{ transitionDelay: "180ms" }}>o</span>
+            <span style={{ transitionDelay: "240ms" }}>r</span>
+            <span style={{ transitionDelay: "300ms" }}>o</span>
           </label>
         </div>
         <button className="buttonAdd" type="submit">

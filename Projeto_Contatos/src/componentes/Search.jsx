@@ -4,6 +4,7 @@ const Search = ({ContatosSearch, setSearch}) => {
       <input
         type="text"
         value={ContatosSearch}
+        placeholder="Nome ou Número"
         onChange={(e) => setSearch(e.target.value)}
         required
       />

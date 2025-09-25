@@ -10,6 +10,7 @@ import './global.css'
 import './buttonAdd.css'
 import './inputValores.css'
 import './listContatos.css'
+import './message.css';
 
 
 function App() {
@@ -99,52 +100,40 @@ function App() {
 
 
 
-  return (
-    <div className='container'>
-      <div>
-        {
-          mostrarIA &&(
-            <IA/>
-          )
-        }
-      </div>
-      <div>
-        <Message
+ return (
+  <div className="container">
+    {/* Coluna esquerda - Gerador de Links */}
+    <div className="container-message">
+      {mostrarIA && <IA />}
+      <Message
         setMostrarIA={setMostrarIA}
         copiarBotao={copiarBotao}
         enviarMensagem={enviarMensagem}
         link={link}
         setNumeroMensagem={setNumeroMensagem}
         numeroMensagem={numeroMensagem}
-        setLink={setLink} />
-      </div>
-      <div>
-        <Create 
-        addContato={addContato}
-        ContatosEdit={ContatosEdit}/>
-      </div>
+        setLink={setLink}
+      />
+    </div>
 
-      <div>
-        <Search 
-        ContatosSearch={ContatosSearch}
-        setSearch={setSearch}/>
-      </div>
-
-      <div className='containerList'>
-          {searchContato().map ((contato)=>(
-            <ListContatos 
-            key = {contato.id}
+    {/* Coluna direita - Agenda */}
+    <div className="container-agenda">
+      <Create addContato={addContato} ContatosEdit={ContatosEdit} />
+      <Search ContatosSearch={ContatosSearch} setSearch={setSearch} />
+      <div className="containerList">
+        {searchContato().map((contato) => (
+          <ListContatos
+            key={contato.id}
             contato={contato}
             removeContato={removeContato}
             editContato={editContato}
-            setNumeroMensagem={setNumeroMensagem}/> 
-          ))
-        }
-          
+            setNumeroMensagem={setNumeroMensagem}
+          />
+        ))}
       </div>
-
     </div>
-  )
+  </div>
+);
 }
 
 export default App

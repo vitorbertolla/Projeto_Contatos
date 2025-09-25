@@ -1,33 +1,83 @@
-import { useState } from "react"
+import { useState } from "react";
 
-const Message = ({enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIA}) =>{
-    const [mensagem, setMensagem] = useState("")
+const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIA }) => {
+  const [mensagem, setMensagem] = useState("");
 
-    const Submit = async (e) => {
-        e.preventDefault()
-        if (!numeroMensagem ) return
-        else {
-            const success = enviarMensagem(numeroMensagem, mensagem)
-                if (success) {
-                    setNumeroMensagem("")
-                    setMensagem("")
-                }
-        }
-  }
+  const Submit = async (e) => {
+    e.preventDefault();
+    if (!numeroMensagem) return;
+    else {
+      const success = enviarMensagem(numeroMensagem, mensagem);
+      if (success) {
+        setNumeroMensagem("");
+        setMensagem("");
+      }
+    }
+  };
 
-    return(
-        <div>
-                <form onSubmit={Submit}>
-                    <input type="text" placeholder="Qual o Número?" value={numeroMensagem} onChange={(e) => setNumeroMensagem(e.target.value)}/>
-                    <input type="text" placeholder="Qual sua mensagem?" value={mensagem} onChange={(e) => setMensagem(e.target.value)}/>
-                    <button type="submit">Enviar Mensagem</button>
-                    <p> Seu link: {link}
-                    <button type="button" onClick={() => copiarBotao(link)}>Copiar Link</button></p>
-                    <button type="button"><a href={link} target="_blank" rel="noopener noreferrer">Abrir Whatsapp</a></button>
-                    <button onClick={() => setMostrarIA(prev => !prev)}>Gerar com Ia</button>
-                </form>
-
+  return (
+    <div className="message-container">
+      <h1>Gerador de Links</h1>
+      <form onSubmit={Submit}>
+        <div className="form-control">
+          <input
+            type="text"
+            value={numeroMensagem}
+            placeholder="(44) 91234-5678"
+            onChange={(e) => setNumeroMensagem(e.target.value)}
+            required
+          />
+          <label>
+            <span style={{ transitionDelay: "0ms" }}>N</span>
+            <span style={{ transitionDelay: "60ms" }}>ú</span>
+            <span style={{ transitionDelay: "120ms" }}>m</span>
+            <span style={{ transitionDelay: "180ms" }}>e</span>
+            <span style={{ transitionDelay: "240ms" }}>r</span>
+            <span style={{ transitionDelay: "300ms" }}>o</span>
+          </label>
         </div>
-    )
-}
-export default Message
+
+        <div className="form-control">
+        <input
+            type="text"
+            placeholder="Digite sua mensagem..."
+            value={mensagem}
+            onChange={(e) => setMensagem(e.target.value)}
+            required
+        />
+        <label>
+            <span style={{ transitionDelay: "0ms" }}>M</span>
+            <span style={{ transitionDelay: "60ms" }}>e</span>
+            <span style={{ transitionDelay: "120ms" }}>n</span>
+            <span style={{ transitionDelay: "180ms" }}>s</span>
+            <span style={{ transitionDelay: "240ms" }}>a</span>
+            <span style={{ transitionDelay: "300ms" }}>g</span>
+            <span style={{ transitionDelay: "360ms" }}>e</span>
+            <span style={{ transitionDelay: "420ms" }}>m</span>
+        </label>
+        </div>
+
+        <button className="buttonAdd" type="submit">Preparar Mensagem</button>
+
+        {link && (
+          <div className="link-gerado">
+            <p>Link gerado:</p>
+            <input type="text" value={link} readOnly />
+            <div className="link-buttons">
+              <button type="button" onClick={() => copiarBotao(link)}>📋</button>
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <button type="button">Abrir WhatsApp</button>
+              </a>
+            </div>
+          </div>
+        )}
+
+        <button className="ia-toggle" type="button" onClick={() => setMostrarIA(prev => !prev)}>
+          Gerar com IA
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default Message;
