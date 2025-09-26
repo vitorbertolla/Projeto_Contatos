@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Create = ({ addContato, numeroInvalido, ContatosEdit }) => {
+const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido }) => {
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
 
@@ -62,8 +62,11 @@ const Create = ({ addContato, numeroInvalido, ContatosEdit }) => {
             <span style={{ transitionDelay: "240ms" }}>r</span>
             <span style={{ transitionDelay: "300ms" }}>o</span>
           </label>
-          {numeroInvalido &&(
+          {numeroInvalidoCreate &&(
             <p>Número Inválido</p>
+          )}
+          {numeroRepetido &&(
+            <p>Número já adicionado na lista de contatos</p>
           )}
         </div>
         <button className="buttonAdd" type="submit">

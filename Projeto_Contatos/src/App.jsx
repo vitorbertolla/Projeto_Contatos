@@ -21,7 +21,9 @@ function App() {
   const [numeroMensagem, setNumeroMensagem] = useState("")
   const [mensagem, setMensagem] = useState("")
   const [mostrarIA, setMostrarIA] = useState(false)
+  const [numeroRepetido, setNumeroRepetido] = useState(false)
   const [numeroInvalido, setNumeroInvalido] = useState(false)
+  const [numeroInvalidoCreate, setNumeroInvalidoCreate] = useState(false)
 
 
 
@@ -30,9 +32,9 @@ function App() {
 
     // valida o número
     if(!validarNumber(number)){
-      setNumeroInvalido(true)
+      setNumeroInvalidoCreate(true)
       setTimeout(() => {
-        setNumeroInvalido(false)
+        setNumeroInvalidoCreate(false)
         }, 3000)
       return false
     }
@@ -55,7 +57,10 @@ function App() {
     const numeroExiste = Contatos.some(
     (contato) => contato.number === numberFormatado)
     if (numeroExiste){
-      alert("Número já adicionado na sua lista de Contatos ")
+      setNumeroRepetido(true)
+      setTimeout(() => {
+        setNumeroRepetido(false)
+        }, 3000)
       return false
     }
       
@@ -138,8 +143,9 @@ function App() {
     {/* Coluna direita - Agenda */}
     <div className="container-agenda">
       <Create addContato={addContato}
+        numeroRepetido={numeroRepetido}
         ContatosEdit={ContatosEdit} 
-        numeroInvalido={numeroInvalido}/>
+        numeroInvalidoCreate={numeroInvalidoCreate}/>
       <Search ContatosSearch={ContatosSearch} setSearch={setSearch} />
       <div className="containerList">
         {searchContato().map((contato) => (
