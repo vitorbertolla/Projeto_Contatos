@@ -4,13 +4,15 @@ import ListContatos from './componentes/listContatos'
 import Search from './componentes/Search'
 import { validarNumber, formatarNumber } from './componentes/validarContatos'
 import Message from './componentes/Message'
-import IA from './componentes/IA'
+import IATraducao from './componentes/IATraducao'
+import IACreate from './componentes/IAcreate'
 import './theme.css'
 import './global.css'
 import './buttonAdd.css'
 import './inputValores.css'
 import './listContatos.css'
 import './message.css';
+
 
 
 function App() {
@@ -20,7 +22,8 @@ function App() {
   const [link, setLink] = useState("") 
   const [numeroMensagem, setNumeroMensagem] = useState("")
   const [mensagem, setMensagem] = useState("")
-  const [mostrarIA, setMostrarIA] = useState(false)
+  const [mostrarIATraducao, setMostrarIATraducao] = useState(false)
+  const [mostrarIACreate, setMostrarIACreate] = useState(false)
   const [numeroRepetido, setNumeroRepetido] = useState(false)
   const [numeroInvalido, setNumeroInvalido] = useState(false)
   const [numeroInvalidoCreate, setNumeroInvalidoCreate] = useState(false)
@@ -121,16 +124,22 @@ function App() {
   <div className="container">
     {/* Coluna esquerda - Gerador de Links */}
     <div className="container-message">
-      {mostrarIA && (
-        <IA
+      {mostrarIATraducao && (
+        <IATraducao
         setMensagem={setMensagem}
-        setMostrarIA={setMostrarIA}
+        setMostrarIATraducao={setMostrarIATraducao}
+        />)}
+      {mostrarIACreate && (
+        <IACreate
+        setMensagem={setMensagem}
+        setMostrarIACreate={setMostrarIACreate}
         />)}
       <Message
         numeroInvalido={numeroInvalido}
         setMensagem={setMensagem}
         mensagem={mensagem}
-        setMostrarIA={setMostrarIA}
+        setMostrarIATraducao={setMostrarIATraducao}
+        setMostrarIACreate={setMostrarIACreate}
         copiarBotao={copiarBotao}
         enviarMensagem={enviarMensagem}
         link={link}

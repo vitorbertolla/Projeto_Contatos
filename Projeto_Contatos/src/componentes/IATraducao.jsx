@@ -1,53 +1,36 @@
 import { useState } from "react"
 import './IAstyle.css'
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
-const IA = ({ setMensagem, setMostrarIA }) => {
+
+const IATraducao = ({ setMensagem, setMostrarIATraducao }) => {
   const [prompt, setPrompt] = useState("")
   const [resposta, setResposta] = useState("")
   const [carregando, setCarregando] = useState(false)
-  const [idioma, setIdioma] = useState("en") // en, es, fr
+  const [idioma, setIdioma] = useState("en")
+  const apikey = import.meta.env.VITE_API_KEY
 
-  const enviarPrompt = async () => {
+const enviarPrompt = async () => {
+    if (!prompt) return;
     setCarregando(true)
     setResposta("")
 
-    const apikey = import.meta.env.VITE_HF_KEY
-
-    // dicionário de modelos por idioma
-    const modelos = {
-      en: "Helsinki-NLP/opus-mt-pt-en",
-      es: "Helsinki-NLP/opus-mt-pt-es",
-      fr: "Helsinki-NLP/opus-mt-pt-fr",
-    }
-
     try {
-      const respostaAPI = await fetch(
-        `https://api-inference.huggingface.co/models/${modelos[idioma]}`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apikey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            inputs: prompt,
-          }),
-        }
+      const genAI = new GoogleGenerativeAI(apikey)
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+
+      const response = await model.generateContent(
+        `Traduza o seguinte texto para (passe apenas uma tradução) ${idioma}: ${prompt}`
       )
 
-      const dados = await respostaAPI.json()
-      console.log("Resposta da API:", dados)
-
-      // para os modelos Helsinki, a saída vem em translation_text
-      const conteudo = dados?.[0]?.translation_text || JSON.stringify(dados)
-      setResposta(conteudo)
-
-    } catch (erro) {
-      setResposta(`Erro na requisição: ${erro}`)
+      setResposta(response.response.text())
+    } catch (error) {
+      console.error("Erro ao traduzir:", error)
+    } finally {
+      setCarregando(false)
     }
-
-    setCarregando(false)
   }
+
 
   return (
     <div className="ia-container">
@@ -65,6 +48,8 @@ const IA = ({ setMensagem, setMostrarIA }) => {
           <option value="en">Inglês</option>
           <option value="es">Espanhol</option>
           <option value="fr">Francês</option>
+          <option value="de">Alemão</option>
+          <option value="ja">Japonês</option>
         </select>
 
         <button
@@ -78,7 +63,7 @@ const IA = ({ setMensagem, setMostrarIA }) => {
         <button
           onClick={() => {
             setMensagem(resposta)
-            setMostrarIA((prev) => !prev)
+            setMostrarIATraducao((prev) => !prev)
           }}
         >
           Concluir
@@ -94,4 +79,4 @@ const IA = ({ setMensagem, setMostrarIA }) => {
   )
 }
 
-export default IA
+export default IATraducao

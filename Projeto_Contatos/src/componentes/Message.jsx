@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIA,setMensagem, mensagem, numeroInvalido}) => {
+const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIATraducao,setMensagem, mensagem, numeroInvalido, setMostrarIACreate}) => {
   const[mensagemCopiar, setMensagemCopiar] = useState(false)
   const Submit = async (e) => {
     e.preventDefault();
@@ -91,8 +91,11 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
           </div>
         )}
 
-        <button className="ia-toggle" type="button" onClick={() => setMostrarIA(prev => !prev)}>
-          Gerar com IA
+        <button className="ia-toggle" type="button" onClick={() => setMostrarIATraducao(prev => !prev)}>
+          traduza com IA
+        </button>
+        <button className="ia-toggle" type="button" onClick={() => setMostrarIACreate(prev => !prev)}>
+          gere com IA
         </button>
       </form>
     </div>
