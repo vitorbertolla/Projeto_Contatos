@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState } from "react"
+import './message.css'
 
-const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIATraducao,setMensagem, mensagem, numeroInvalido, setMostrarIACreate}) => {
+const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensagem, copiarBotao, setMostrarIATraducao,setMensagem, mensagem, numeroInvalido, setMostrarIACreate, formatarNumber}) => {
   const[mensagemCopiar, setMensagemCopiar] = useState(false)
   const Submit = async (e) => {
     e.preventDefault();
@@ -44,7 +45,7 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
             value={numeroMensagem}
             maxLength="15"
             placeholder="(44) 91234-5678"
-            onChange={(e) => setNumeroMensagem(e.target.value)}
+            onChange={(e) => setNumeroMensagem(formatarNumber(e.target.value))}
             required
           />
 

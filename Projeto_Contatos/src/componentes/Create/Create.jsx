@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido }) => {
+const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido, formatarNumber }) => {
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
 
@@ -51,7 +51,7 @@ const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido
             type="text"
             placeholder="(44) 91234-5678"
             value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={(e) => setNumber(formatarNumber(e.target.value))}
             required
           />
           <label>
