@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Create from "./componentes/create/create";
+import Create from "./componentes/Create/Create";
 import ListContatos from "./componentes/listContatos/listContatos";
 import Search from "./componentes/Search/Search";
 import {validarNumber,formatarNumber} from "./componentes/ValidarContatos/validarContatos";

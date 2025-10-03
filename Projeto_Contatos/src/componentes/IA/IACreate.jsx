@@ -34,7 +34,7 @@ const IACreate = ({ setMensagem, setMostrarIACreate })=>{
 
     return (
         <div className="ia-container">
-        <h1 className="ia-title">Tradutor com IA</h1>
+        <h1 className="ia-title">Gerador de mensagens</h1>
         <div className="ia-texto-botao">
             <input
             type="text"
