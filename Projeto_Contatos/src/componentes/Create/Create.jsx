@@ -62,12 +62,13 @@ const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido
             <span style={{ transitionDelay: "240ms" }}>r</span>
             <span style={{ transitionDelay: "300ms" }}>o</span>
           </label>
-          {numeroInvalidoCreate &&(
-            <p>Número Inválido</p>
-          )}
-          {numeroRepetido &&(
-            <p>Número já adicionado na lista de contatos</p>
-          )}
+            {numeroInvalidoCreate && (
+              <p className="error-msg">Número inválido</p>
+            )}
+            {numeroRepetido && (
+              <p className="error-msg">Número já adicionado</p>
+            )}
+
         </div>
         <button className="buttonAdd" type="submit">
           {ContatosEdit ? "Salvar Alterações" : "Adicionar Contato"}

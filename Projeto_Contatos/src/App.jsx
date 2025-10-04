@@ -8,8 +8,6 @@ import IATraducao from "./componentes/IA/IATraducao";
 import IACreate from "./componentes/IA/IACreate";
 import "./GeneralCSS/theme.css";
 import "./GeneralCSS/global.css";
-import "./GeneralCSS/buttonAdd.css";
-import "./GeneralCSS/inputValores.css";
 
 function App() {
   const [Contatos, setContatos] = useState([]);
@@ -121,18 +119,6 @@ function App() {
     <div className="container">
       {/* Coluna esquerda - Gerador de Links */}
       <div className="container-message">
-        {mostrarIATraducao && (
-          <IATraducao
-            setMensagem={setMensagem}
-            setMostrarIATraducao={setMostrarIATraducao}
-          />
-        )}
-        {mostrarIACreate && (
-          <IACreate
-            setMensagem={setMensagem}
-            setMostrarIACreate={setMostrarIACreate}
-          />
-        )}
         <Message
         formatarNumber={formatarNumber}
           numeroInvalido={numeroInvalido}
@@ -147,6 +133,18 @@ function App() {
           numeroMensagem={numeroMensagem}
           setLink={setLink}
         />
+        {mostrarIATraducao && (
+          <IATraducao
+            setMensagem={setMensagem}
+            setMostrarIATraducao={setMostrarIATraducao}
+          />
+        )}
+        {mostrarIACreate && (
+          <IACreate
+            setMensagem={setMensagem}
+            setMostrarIACreate={setMostrarIACreate}
+          />
+        )}
       </div>
 
       {/* Coluna direita - Agenda */}

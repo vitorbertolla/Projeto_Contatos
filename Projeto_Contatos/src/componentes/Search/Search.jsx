@@ -6,7 +6,6 @@ const Search = ({ContatosSearch, setSearch}) => {
         value={ContatosSearch}
         placeholder="Nome ou Número"
         onChange={(e) => setSearch(e.target.value)}
-        required
       />
       <label>
         <span style={{ transitionDelay: "0ms" }}>P</span>

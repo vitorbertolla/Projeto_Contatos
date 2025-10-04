@@ -36,15 +36,29 @@ const enviarPrompt = async () => {
     <div className="ia-container">
       <h1 className="ia-title">Tradutor de mensagens</h1>
       <div className="ia-texto-botao">
+      <div className="form-control">
         <input
           type="text"
           placeholder="Digite o texto em português"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
+          required
           className="ia-input"
         />
+        <label>
+          <span style={{ transitionDelay: "0ms" }}>M</span>
+          <span style={{ transitionDelay: "60ms" }}>e</span>
+          <span style={{ transitionDelay: "120ms" }}>n</span>
+          <span style={{ transitionDelay: "180ms" }}>s</span>
+          <span style={{ transitionDelay: "240ms" }}>a</span>
+          <span style={{ transitionDelay: "300ms" }}>g</span>
+          <span style={{ transitionDelay: "360ms" }}>e</span>
+          <span style={{ transitionDelay: "400ms" }}>m</span>
+        </label>
+      </div>
 
-        <select value={idioma} onChange={(e) => setIdioma(e.target.value)}>
+
+        <select className="ia-select" value={idioma} onChange={(e) => setIdioma(e.target.value)}>
           <option value="en">Inglês</option>
           <option value="es">Espanhol</option>
           <option value="fr">Francês</option>
@@ -60,7 +74,7 @@ const enviarPrompt = async () => {
           {carregando ? "Traduzindo..." : "Traduzir"}
         </button>
 
-        <button
+        <button className="ia-concluir"
           onClick={() => {
             setMensagem(resposta)
             setMostrarIATraducao((prev) => !prev)

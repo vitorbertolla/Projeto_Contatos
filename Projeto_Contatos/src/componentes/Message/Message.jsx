@@ -69,22 +69,21 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
             <p>Link gerado:</p>
             <input type="text" value={link} readOnly />
             <div className="link-buttons">
-              {mensagemCopiar &&(
-                <p>{(copiarBotao)? "Copiado com sucesso": "Erro ao copiar"}</p>
+              {mensagemCopiar && (
+                <div className="toast show">Copiado com sucesso!</div>
               )}
-                <button
-                  type="button"
-                  onClick={() => {
-                    copiarBotao(link)
-                    setMensagemCopiar(true)
-
-                    setTimeout(() => {
-                      setMensagemCopiar(false)
-                    }, 2000)
-                  }}
-                >
-                  📋
-                </button>
+              <button
+                type="button"
+                onClick={() => {
+                  copiarBotao(link);
+                  setMensagemCopiar(true);
+                  setTimeout(() => {
+                    setMensagemCopiar(false);
+                  }, 2000);
+                }}
+              >
+                📋
+              </button>
               <a href={link} target="_blank" rel="noopener noreferrer">
                 <button type="button">Abrir WhatsApp</button>
               </a>
@@ -93,10 +92,10 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
         )}
 
         <button className="ia-toggle" type="button" onClick={() => setMostrarIATraducao(prev => !prev)}>
-          traduza com IA
+          Traduza com IA
         </button>
         <button className="ia-toggle" type="button" onClick={() => setMostrarIACreate(prev => !prev)}>
-          gere com IA
+          Gere com IA
         </button>
       </form>
     </div>

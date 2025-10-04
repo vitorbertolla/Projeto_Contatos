@@ -1,57 +1,142 @@
 .ia-container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 40rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--branco);
+  border-radius: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.123) 1px 1px 10px;
 }
 
 .ia-title {
+  color: var(--verde-2);
+  font-size: 1.8rem;
+  font-weight: bold;
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .ia-texto-botao {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: stretch; /* força todos os elementos a mesma altura */
+  width: 100%;
 }
 
+.ia-input,
+.ia-select,
+.ia-button,
+.ia-concluir {
+  flex: 1;            /* ocupam espaço proporcional */
+  min-width: 150px;   /* evita ficar minúsculo */
+  min-height: 42px;   /* garante altura igual */
+}
+
+
+/* Input segue padrão */
 .ia-input {
-  flex: 1;
-  padding: 10px;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--verde-4);
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 0;
+  width: 12rem;
+  min-height: 42px;      /* mesma altura do select e botão */
 }
 
 .ia-button {
+  display: flex;
+  align-self: center;
+  height: 3rem;
+}
+
+.ia-select {
+  display: flex;
+  align-self: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  color: var(--verde-4);
+  background-color: transparent;
+  border: 2px solid var(--verde-4);
+  border-radius: 34px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  height: 3rem;
+  width: 12rem;        /* define largura igual ao input */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23008000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.ia-select:hover {
+  border-color: var(--verde-2);
+  box-shadow: 0 0 8px rgba(0, 150, 0, 0.2);
+}
+
+.ia-select:focus {
+  outline: none;
+  border-color: var(--verde-2);
+}
+
+/* Botões traduzir / concluir */
+.ia-button,
+.ia-concluir {
+  cursor: pointer;
+  position: relative;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  color: var(--verde-2);
+  border: 2px solid var(--verde-2);
+  border-radius: 34px;
+  background-color: transparent;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
+  min-height: 42px;  /* altura igual ao input/select */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ia-button:disabled {
-  background-color: #999;
-  cursor: not-allowed;
+.ia-button::before,
+.ia-concluir::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 70px;
+  height: 30px;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: var(--verde-2);
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
-.ia-button:hover:enabled {
-  background-color: #0056b3;
+.ia-button:hover::before,
+.ia-concluir:hover::before {
+  scale: 3;
 }
 
-.ia-resposta p {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  white-space: pre-wrap; /* mantém quebras de linha */
+.ia-button:hover,
+.ia-concluir:hover {
+  color: #fff;
+  scale: 1.05;
+  box-shadow: 0 0px 20px rgba(0, 150, 0, 0.3);
+}
+
+.ia-button:active,
+.ia-concluir:active {
+  scale: 1;
 }

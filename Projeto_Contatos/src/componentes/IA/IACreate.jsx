@@ -36,13 +36,29 @@ const IACreate = ({ setMensagem, setMostrarIACreate })=>{
         <div className="ia-container">
         <h1 className="ia-title">Gerador de mensagens</h1>
         <div className="ia-texto-botao">
+            <div className="form-control">
             <input
-            type="text"
-            placeholder="Digite sua solicitação"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            className="ia-input"
+                type="text"
+                placeholder="Digite sua solicitação"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                required
+                className="ia-input"
             />
+            <label>
+                <span style={{ transitionDelay: "0ms" }}>S</span>
+                <span style={{ transitionDelay: "60ms" }}>o</span>
+                <span style={{ transitionDelay: "120ms" }}>l</span>
+                <span style={{ transitionDelay: "180ms" }}>i</span>
+                <span style={{ transitionDelay: "240ms" }}>c</span>
+                <span style={{ transitionDelay: "300ms" }}>i</span>
+                <span style={{ transitionDelay: "360ms" }}>t</span>
+                <span style={{ transitionDelay: "400ms" }}>a</span>
+                <span style={{ transitionDelay: "450ms" }}>ç</span>
+                <span style={{ transitionDelay: "500ms" }}>ã</span>
+                <span style={{ transitionDelay: "550ms" }}>o</span>
+            </label>
+            </div>
 
 
             <button
@@ -53,7 +69,7 @@ const IACreate = ({ setMensagem, setMostrarIACreate })=>{
             {carregando ? "Gerando..." : "Gerar"}
             </button>
 
-            <button
+            <button className="ia-concluir"
             onClick={() => {
                 setMensagem(resposta)
                 setMostrarIACreate((prev) => !prev)

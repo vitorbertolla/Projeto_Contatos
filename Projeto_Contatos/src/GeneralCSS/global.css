@@ -33,7 +33,7 @@ h1{
   grid-template-columns: 1fr 1fr; /* duas colunas iguais */
   gap: 2rem;
   min-height: 80vh;
-  width: 75vw;
+  width: 80vw;
   background-color: var(--branco);
   box-shadow: rgba(0, 0, 0, 0.123) 1px 1px 10px;
   border-radius: 2rem;
@@ -84,4 +84,100 @@ h1{
 .form-control input:valid::placeholder {
   color: rgb(209, 203, 203);
   transition-delay: 0.4s; /* ajuste conforme o tempo da label */
+}
+
+.form-control {
+  position: relative;
+  margin: 20px 0 10px;
+  width: 20rem;
+}
+
+.form-control input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px var(--verde-4) solid;
+  display: block;
+  width: 100%;
+  padding: 12.5px 0;
+  font-size: 18px;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+  border-bottom-color: var(--verde-4);
+}
+
+.form-control label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+.form-control label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  color: var(--verde-4);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus+label span,
+.form-control input:valid+label span {
+  color: var(--verde-4);
+  transform: translateY(-30px);
+}
+
+.buttonAdd {
+  margin-top: 30px;
+  cursor: pointer;
+  position: relative;
+  padding: 10px 24px;
+  font-size: 18px;
+  color: var(--verde-2);
+  border: 2px solid var(--verde-2);
+  border-radius: 34px;
+  background-color: transparent;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
+  width: 20rem;
+}
+
+.buttonAdd::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 70px;
+  height: 30px;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: var(--verde-2);
+  transition: all 0.7s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.buttonAdd:hover::before {
+  scale: 3;
+}
+
+.buttonAdd:hover {
+  color: #ffffff;
+  scale: 1.1;
+  box-shadow: 0 0px 20px rgba(193, 163, 98,0.4);
+}
+
+.buttonAdd:active {
+  scale: 1;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
 }
