@@ -59,7 +59,7 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
             <span style={{ transitionDelay: "300ms" }}>o</span>
           </label>
           {numeroInvalido &&(
-            <p>Número Inválido</p>
+            <p className="error-msg">Número Inválido</p>
           )}
         </div>
 

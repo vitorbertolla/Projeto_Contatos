@@ -26,6 +26,7 @@ function App() {
   const [numeroInvalido, setNumeroInvalido] = useState(false);
   const [numeroInvalidoCreate, setNumeroInvalidoCreate] = useState(false);
 
+
   // Buscar contatos do Supabase ao carregar o app
   useEffect(() => {
     getContatos();
@@ -54,10 +55,7 @@ function App() {
         .eq("id", ContatosEdit.id);
 
       if (!error) {
-        const atualizados = Contatos.map((contato) =>
-          contato.id === ContatosEdit.id ? { ...contato, name, number } : contato
-        );
-        setContatos(atualizados);
+        await getContatos();
         setEdit(null);
       }
       return true;
@@ -77,7 +75,7 @@ function App() {
       .select();
 
     if (!error && data && data.length > 0) {
-      setContatos([...Contatos, data[0]]);
+      await getContatos();
     }
 
     return true;
@@ -86,7 +84,8 @@ function App() {
   const removeContato = async (id) => {
     const { error } = await supabase.from("contatos").delete().eq("id", id);
     if (!error) {
-      setContatos(Contatos.filter((contato) => contato.id !== id));
+      await getContatos();
+      // perguntar para o professor se é melhor atualizar assim ou de forma manual, com filter e map por exemplo
     }
   };
 

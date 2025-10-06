@@ -18,7 +18,7 @@ const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido
     e.preventDefault()
     if (!name || !number) return
     else {
-      const success = addContato(name, number)
+      const success = await addContato(name, number)
       if (success) {
         setName("")
         setNumber("")
