@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 import Create from "./componentes/Create/Create";
 import ListContatos from "./componentes/listContatos/listContatos";
 import Search from "./componentes/Search/Search";
-import {validarNumber,formatarNumber} from "./componentes/ValidarContatos/validarContatos";
+import { validarNumber, formatarNumber } from "./componentes/ValidarContatos/validarContatos";
 import Message from "./componentes/Message/Message";
 import IATraducao from "./componentes/IA/IATraducao";
 import IACreate from "./componentes/IA/IACreate";
 import "./GeneralCSS/theme.css";
 import "./GeneralCSS/global.css";
+
+// Inicialize o Supabase
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+);
 
 function App() {
   const [Contatos, setContatos] = useState([]);
@@ -22,8 +29,19 @@ function App() {
   const [numeroInvalido, setNumeroInvalido] = useState(false);
   const [numeroInvalidoCreate, setNumeroInvalidoCreate] = useState(false);
 
-  const addContato = (name, number) => {
-    // valida o número
+  // Buscar contatos do Supabase ao carregar o app
+  useEffect(() => {
+    getContatos();
+  }, []);
+
+  async function getContatos() {
+    const { data, error } = await supabase.from("contatos").select();
+    if (!error && data) {
+      setContatos(data);
+    }
+  }
+
+  const addContato = async (name, number) => {
     if (!validarNumber(number)) {
       setNumeroInvalidoCreate(true);
       setTimeout(() => {
@@ -32,19 +50,22 @@ function App() {
       return false;
     }
 
-
     if (ContatosEdit) {
-      const update = Contatos.map((contato) =>
-        contato.id === ContatosEdit.id
-          ? // essa linha copia todas as propriedades do contato e sobrescrevem com as novas propriedades
-            { ...contato, name, number: number }
-          : contato
-      );
-
-      setContatos(update);
-      setEdit(null);
+      // Atualiza no Supabase
+      const { error } = await supabase
+        .from("contatos")
+        .update({ name, number })
+        .eq("id", ContatosEdit.id);
+      if (!error) {
+        const update = Contatos.map((contato) =>
+          contato.id === ContatosEdit.id
+            ? { ...contato, name, number }
+            : contato
+        );
+        setContatos(update);
+        setEdit(null);
+      }
     } else {
-      // o some percorre todos os elementos e devolve true ou false
       const numeroExiste = Contatos.some(
         (contato) => contato.number === number
       );
@@ -56,23 +77,28 @@ function App() {
         return false;
       }
 
-      const newContato = {
-        id: Date.now(),
-        name: name,
-        number: number,
-      };
-      setContatos([...Contatos, newContato]);
+      // Insere no Supabase
+      const { data, error } = await supabase
+        .from("contatos")
+        .insert([{ name, number }])
+        .select();
+      if (!error && data && data.length > 0) {
+        setContatos([...Contatos, data[0]]);
+      }
     }
     return true;
   };
 
-  const removeContato = (id) => {
-    const atualizada = Contatos.filter((contato) => contato.id !== id);
-    setContatos(atualizada);
+  const removeContato = async (id) => {
+    // Remove do Supabase
+    const { error } = await supabase.from("contatos").delete().eq("id", id);
+    if (!error) {
+      const atualizada = Contatos.filter((contato) => contato.id !== id);
+      setContatos(atualizada);
+    }
   };
 
   const editContato = (id) => {
-    // .find retorna apenas o primeiro elemento que satisfaça a condição, usado quanto só precisa encontrar um elemento
     const edit = Contatos.find((contato) => contato.id === id);
     if (edit) setEdit(edit);
   };
@@ -85,7 +111,6 @@ function App() {
         contato.number.replace(/\D/g, "").includes(ContatosSearch) ||
         contato.number.includes(ContatosSearch)
     );
-    // para poder pesquisar com ele formatado ou não
   };
 
   const enviarMensagem = (numeroMensagem, mensagem) => {
@@ -110,7 +135,7 @@ function App() {
       .then(() => {
         return true;
       })
-      .catch((err) => {
+      .catch(() => {
         return false;
       });
   };
@@ -120,7 +145,7 @@ function App() {
       {/* Coluna esquerda - Gerador de Links */}
       <div className="container-message">
         <Message
-        formatarNumber={formatarNumber}
+          formatarNumber={formatarNumber}
           numeroInvalido={numeroInvalido}
           setMensagem={setMensagem}
           mensagem={mensagem}

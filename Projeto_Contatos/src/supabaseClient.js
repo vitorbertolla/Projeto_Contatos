@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js" 
 
 const URL = import.meta.env.VITE_SUPABASE_URL
