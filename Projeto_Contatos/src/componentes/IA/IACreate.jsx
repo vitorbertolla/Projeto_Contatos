@@ -2,7 +2,7 @@ import { useState } from "react"
 import './IAstyle.css'
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
-const IACreate = ({ setMensagem, setMostrarIACreate })=>{
+const IACreate = ({ setMensagem, setMostrarIACreate})=>{
     const [prompt, setPrompt] = useState("")
     const [resposta, setResposta] = useState("")
     const [carregando, setCarregando] = useState(false)

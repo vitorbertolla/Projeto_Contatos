@@ -20,25 +20,26 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
       <h1>Gerador de Links</h1>
       <form onSubmit={Submit}>
 
-        <div className="form-control">
-        <input
-            type="text"
-            placeholder="Digite sua mensagem..."
-            value={mensagem}
-            onChange={(e) => setMensagem(e.target.value)}
-            required
-        />
-        <label>
-            <span style={{ transitionDelay: "0ms" }}>M</span>
-            <span style={{ transitionDelay: "60ms" }}>e</span>
-            <span style={{ transitionDelay: "120ms" }}>n</span>
-            <span style={{ transitionDelay: "180ms" }}>s</span>
-            <span style={{ transitionDelay: "240ms" }}>a</span>
-            <span style={{ transitionDelay: "300ms" }}>g</span>
-            <span style={{ transitionDelay: "360ms" }}>e</span>
-            <span style={{ transitionDelay: "420ms" }}>m</span>
-        </label>
-        </div>
+  <div className="form-control">
+    <textarea
+      className="message-input"
+      placeholder="Digite sua mensagem"
+      value={mensagem}
+      onChange={(e) => setMensagem(e.target.value)}
+      required
+    />
+    <label>
+      <span style={{ transitionDelay: "0ms" }}>M</span>
+      <span style={{ transitionDelay: "60ms" }}>e</span>
+      <span style={{ transitionDelay: "120ms" }}>n</span>
+      <span style={{ transitionDelay: "180ms" }}>s</span>
+      <span style={{ transitionDelay: "240ms" }}>a</span>
+      <span style={{ transitionDelay: "300ms" }}>g</span>
+      <span style={{ transitionDelay: "360ms" }}>e</span>
+      <span style={{ transitionDelay: "420ms" }}>m</span>
+    </label>
+  </div>
+
         <div className="form-control">
           <input
             type="text"
@@ -91,10 +92,10 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
           </div>
         )}
 
-        <button className="ia-toggle" type="button" onClick={() => setMostrarIATraducao(prev => !prev)}>
+        <button className="ia-toggle" type="button" onClick={() => {setMostrarIATraducao(prev => !prev); setMostrarIACreate(false)}}>
           Traduza com IA
         </button>
-        <button className="ia-toggle" type="button" onClick={() => setMostrarIACreate(prev => !prev)}>
+        <button className="ia-toggle" type="button" onClick={() => {setMostrarIACreate(prev => !prev); setMostrarIATraducao(false)}}>
           Gere com IA
         </button>
       </form>

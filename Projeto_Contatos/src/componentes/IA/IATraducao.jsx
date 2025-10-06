@@ -3,7 +3,7 @@ import './IAstyle.css'
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
 
-const IATraducao = ({ setMensagem, setMostrarIATraducao }) => {
+const IATraducao = ({ setMensagem, setMostrarIATraducao}) => {
   const [prompt, setPrompt] = useState("")
   const [resposta, setResposta] = useState("")
   const [carregando, setCarregando] = useState(false)

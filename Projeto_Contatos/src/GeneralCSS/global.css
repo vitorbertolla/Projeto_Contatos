@@ -181,3 +181,71 @@ h1{
   text-align: left;
   width: 100%;
 }
+
+/* Área geral que contém tudo */
+.ia-section-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+}
+
+/* Caixas flutuantes da IA */
+.ia-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+
+  width: 90%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  padding: 22px;
+  transition: all 0.3s ease;
+}
+
+/* Efeito de elevação ao passar o mouse */
+.ia-container:hover {
+  transform: translateX(-50%) translateY(-4px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Espaço do gerador de link (fica mais abaixo) */
+.link-gerador {
+  margin-top: 450px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Caixas flutuantes da IA */
+.ia-popup {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: fadeUp 0.3s ease forwards;
+}
+
+/* Animação suave de entrada */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+

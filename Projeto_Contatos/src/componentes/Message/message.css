@@ -96,3 +96,36 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12.5px 0;
+  font-size: 18px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--verde-4);
+  resize: vertical;
+  color: #000;
+  font-family: var(--font-1);
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.form-control textarea::placeholder {
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.form-control textarea:focus::placeholder,
+.form-control textarea:valid::placeholder {
+  color: rgb(209, 203, 203);
+  transition-delay: 0.4s;
+}
+.form-control textarea:focus + label span,
+.form-control textarea:valid + label span {
+  transform: translateY(-30px);
+  color: var(--verde-4);
+}

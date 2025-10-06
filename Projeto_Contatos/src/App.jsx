@@ -29,6 +29,12 @@ function App() {
   const [numeroInvalido, setNumeroInvalido] = useState(false);
   const [numeroInvalidoCreate, setNumeroInvalidoCreate] = useState(false);
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+  const addContato = (name, number) => {
+=======
+>>>>>>> Stashed changes
   // Buscar contatos do Supabase ao carregar o app
   useEffect(() => {
     getContatos();
@@ -42,15 +48,18 @@ function App() {
   }
 
   const addContato = async (name, number) => {
+<<<<<<< Updated upstream
+=======
+>>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
+>>>>>>> Stashed changes
     if (!validarNumber(number)) {
       setNumeroInvalidoCreate(true);
-      setTimeout(() => {
-        setNumeroInvalidoCreate(false);
-      }, 3000);
+      setTimeout(() => setNumeroInvalidoCreate(false), 3000);
       return false;
     }
 
     if (ContatosEdit) {
+<<<<<<< Updated upstream
       // Atualiza no Supabase
       const { error } = await supabase
         .from("contatos")
@@ -66,17 +75,49 @@ function App() {
         setEdit(null);
       }
     } else {
+=======
+<<<<<<< HEAD
+      const update = Contatos.map((contato) =>
+        contato.id === ContatosEdit.id ? { ...contato, name, number } : contato
+      );
+      setContatos(update);
+      setEdit(null);
+    } else {
+      const numeroExiste = Contatos.some((contato) => contato.number === number);
+=======
+      // Atualiza no Supabase
+      const { error } = await supabase
+        .from("contatos")
+        .update({ name, number })
+        .eq("id", ContatosEdit.id);
+      if (!error) {
+        const update = Contatos.map((contato) =>
+          contato.id === ContatosEdit.id
+            ? { ...contato, name, number }
+            : contato
+        );
+        setContatos(update);
+        setEdit(null);
+      }
+    } else {
+>>>>>>> Stashed changes
       const numeroExiste = Contatos.some(
         (contato) => contato.number === number
       );
+>>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
       if (numeroExiste) {
         setNumeroRepetido(true);
-        setTimeout(() => {
-          setNumeroRepetido(false);
-        }, 3000);
+        setTimeout(() => setNumeroRepetido(false), 3000);
         return false;
       }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+      const newContato = { id: Date.now(), name, number };
+      setContatos([...Contatos, newContato]);
+=======
+>>>>>>> Stashed changes
       // Insere no Supabase
       const { data, error } = await supabase
         .from("contatos")
@@ -85,10 +126,23 @@ function App() {
       if (!error && data && data.length > 0) {
         setContatos([...Contatos, data[0]]);
       }
+<<<<<<< Updated upstream
+=======
+>>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
+>>>>>>> Stashed changes
     }
     return true;
   };
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+  const removeContato = (id) => setContatos(Contatos.filter((c) => c.id !== id));
+
+  const editContato = (id) => {
+    const edit = Contatos.find((c) => c.id === id);
+=======
+>>>>>>> Stashed changes
   const removeContato = async (id) => {
     // Remove do Supabase
     const { error } = await supabase.from("contatos").delete().eq("id", id);
@@ -100,36 +154,36 @@ function App() {
 
   const editContato = (id) => {
     const edit = Contatos.find((contato) => contato.id === id);
+>>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
     if (edit) setEdit(edit);
   };
 
   const searchContato = () => {
     if (!ContatosSearch) return Contatos;
     return Contatos.filter(
-      (contato) =>
-        contato.name.toLowerCase().includes(ContatosSearch.toLowerCase()) ||
-        contato.number.replace(/\D/g, "").includes(ContatosSearch) ||
-        contato.number.includes(ContatosSearch)
+      (c) =>
+        c.name.toLowerCase().includes(ContatosSearch.toLowerCase()) ||
+        c.number.replace(/\D/g, "").includes(ContatosSearch) ||
+        c.number.includes(ContatosSearch)
     );
   };
 
   const enviarMensagem = (numeroMensagem, mensagem) => {
     if (!validarNumber(numeroMensagem)) {
       setNumeroInvalido(true);
-      setTimeout(() => {
-        setNumeroInvalido(false);
-      }, 3000);
+      setTimeout(() => setNumeroInvalido(false), 3000);
       return false;
     }
     const numeroLimpo = numeroMensagem.replace(/\D/g, "");
-    const novoLink = `https://wa.me/${numeroLimpo}?text=${encodeURIComponent(
-      mensagem
-    )}`;
+    const novoLink = `https://wa.me/${numeroLimpo}?text=${encodeURIComponent(mensagem)}`;
     setLink(novoLink);
     return true;
   };
 
   const copiarBotao = (link) => {
+<<<<<<< HEAD
+    navigator.clipboard.writeText(link).catch(() => false);
+=======
     navigator.clipboard
       .writeText(link)
       .then(() => {
@@ -138,6 +192,7 @@ function App() {
       .catch(() => {
         return false;
       });
+>>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
   };
 
   return (
@@ -158,17 +213,27 @@ function App() {
           numeroMensagem={numeroMensagem}
           setLink={setLink}
         />
+
+        {/* === IA Tradução (flutua sobre o gerador de link) === */}
         {mostrarIATraducao && (
-          <IATraducao
-            setMensagem={setMensagem}
-            setMostrarIATraducao={setMostrarIATraducao}
-          />
+          <div className="ia-popup">
+            <IATraducao
+              setMensagem={setMensagem}
+              setMostrarIATraducao={setMostrarIATraducao}
+              setMostrarIACreate={setMostrarIACreate}
+            />
+          </div>
         )}
+
+        {/* === IA Geração (flutua sobre o gerador de link) === */}
         {mostrarIACreate && (
-          <IACreate
-            setMensagem={setMensagem}
-            setMostrarIACreate={setMostrarIACreate}
-          />
+          <div className="ia-popup">
+            <IACreate
+              setMensagem={setMensagem}
+              setMostrarIACreate={setMostrarIACreate}
+              setMostrarIATraducao={setMostrarIATraducao}
+            />
+          </div>
         )}
       </div>
 
