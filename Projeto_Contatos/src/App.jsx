@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import {supabase} from './supabaseClient'
 import Create from "./componentes/Create/Create";
 import ListContatos from "./componentes/listContatos/listContatos";
 import Search from "./componentes/Search/Search";
@@ -10,11 +11,7 @@ import IACreate from "./componentes/IA/IACreate";
 import "./GeneralCSS/theme.css";
 import "./GeneralCSS/global.css";
 
-// Inicialize o Supabase
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
-);
+
 
 function App() {
   const [Contatos, setContatos] = useState([]);
@@ -29,12 +26,6 @@ function App() {
   const [numeroInvalido, setNumeroInvalido] = useState(false);
   const [numeroInvalidoCreate, setNumeroInvalidoCreate] = useState(false);
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  const addContato = (name, number) => {
-=======
->>>>>>> Stashed changes
   // Buscar contatos do Supabase ao carregar o app
   useEffect(() => {
     getContatos();
@@ -48,113 +39,59 @@ function App() {
   }
 
   const addContato = async (name, number) => {
-<<<<<<< Updated upstream
-=======
->>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
->>>>>>> Stashed changes
+    // Validação
     if (!validarNumber(number)) {
       setNumeroInvalidoCreate(true);
       setTimeout(() => setNumeroInvalidoCreate(false), 3000);
       return false;
     }
 
+    // Se estiver editando
     if (ContatosEdit) {
-<<<<<<< Updated upstream
-      // Atualiza no Supabase
       const { error } = await supabase
         .from("contatos")
         .update({ name, number })
         .eq("id", ContatosEdit.id);
-      if (!error) {
-        const update = Contatos.map((contato) =>
-          contato.id === ContatosEdit.id
-            ? { ...contato, name, number }
-            : contato
-        );
-        setContatos(update);
-        setEdit(null);
-      }
-    } else {
-=======
-<<<<<<< HEAD
-      const update = Contatos.map((contato) =>
-        contato.id === ContatosEdit.id ? { ...contato, name, number } : contato
-      );
-      setContatos(update);
-      setEdit(null);
-    } else {
-      const numeroExiste = Contatos.some((contato) => contato.number === number);
-=======
-      // Atualiza no Supabase
-      const { error } = await supabase
-        .from("contatos")
-        .update({ name, number })
-        .eq("id", ContatosEdit.id);
-      if (!error) {
-        const update = Contatos.map((contato) =>
-          contato.id === ContatosEdit.id
-            ? { ...contato, name, number }
-            : contato
-        );
-        setContatos(update);
-        setEdit(null);
-      }
-    } else {
->>>>>>> Stashed changes
-      const numeroExiste = Contatos.some(
-        (contato) => contato.number === number
-      );
->>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
-      if (numeroExiste) {
-        setNumeroRepetido(true);
-        setTimeout(() => setNumeroRepetido(false), 3000);
-        return false;
-      }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-      const newContato = { id: Date.now(), name, number };
-      setContatos([...Contatos, newContato]);
-=======
->>>>>>> Stashed changes
-      // Insere no Supabase
-      const { data, error } = await supabase
-        .from("contatos")
-        .insert([{ name, number }])
-        .select();
-      if (!error && data && data.length > 0) {
-        setContatos([...Contatos, data[0]]);
+      if (!error) {
+        const atualizados = Contatos.map((contato) =>
+          contato.id === ContatosEdit.id ? { ...contato, name, number } : contato
+        );
+        setContatos(atualizados);
+        setEdit(null);
       }
-<<<<<<< Updated upstream
-=======
->>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
->>>>>>> Stashed changes
+      return true;
     }
+
+    // Se for novo contato
+    const numeroExiste = Contatos.some((contato) => contato.number === number);
+    if (numeroExiste) {
+      setNumeroRepetido(true);
+      setTimeout(() => setNumeroRepetido(false), 3000);
+      return false;
+    }
+
+    const { data, error } = await supabase
+      .from("contatos")
+      .insert([{ name, number }])
+      .select();
+
+    if (!error && data && data.length > 0) {
+      setContatos([...Contatos, data[0]]);
+    }
+
     return true;
   };
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  const removeContato = (id) => setContatos(Contatos.filter((c) => c.id !== id));
-
-  const editContato = (id) => {
-    const edit = Contatos.find((c) => c.id === id);
-=======
->>>>>>> Stashed changes
   const removeContato = async (id) => {
-    // Remove do Supabase
     const { error } = await supabase.from("contatos").delete().eq("id", id);
     if (!error) {
-      const atualizada = Contatos.filter((contato) => contato.id !== id);
-      setContatos(atualizada);
+      setContatos(Contatos.filter((contato) => contato.id !== id));
     }
   };
 
   const editContato = (id) => {
     const edit = Contatos.find((contato) => contato.id === id);
->>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
     if (edit) setEdit(edit);
   };
 
@@ -181,18 +118,10 @@ function App() {
   };
 
   const copiarBotao = (link) => {
-<<<<<<< HEAD
-    navigator.clipboard.writeText(link).catch(() => false);
-=======
     navigator.clipboard
       .writeText(link)
-      .then(() => {
-        return true;
-      })
-      .catch(() => {
-        return false;
-      });
->>>>>>> ea873788e84940a7f481eb6b66cbfeed0aaacfcb
+      .then(() => true)
+      .catch(() => false);
   };
 
   return (
@@ -214,7 +143,6 @@ function App() {
           setLink={setLink}
         />
 
-        {/* === IA Tradução (flutua sobre o gerador de link) === */}
         {mostrarIATraducao && (
           <div className="ia-popup">
             <IATraducao
@@ -225,7 +153,6 @@ function App() {
           </div>
         )}
 
-        {/* === IA Geração (flutua sobre o gerador de link) === */}
         {mostrarIACreate && (
           <div className="ia-popup">
             <IACreate
