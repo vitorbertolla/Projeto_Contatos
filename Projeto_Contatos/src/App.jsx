@@ -172,7 +172,9 @@ function App() {
           ContatosEdit={ContatosEdit}
           numeroInvalidoCreate={numeroInvalidoCreate}
         />
-        <Search ContatosSearch={ContatosSearch} setSearch={setSearch} />
+        <Search ContatosSearch={ContatosSearch} 
+        setSearch={setSearch} 
+        Contatos={Contatos}/>
         <div className="containerList">
           {searchContato().map((contato) => (
             <ListContatos

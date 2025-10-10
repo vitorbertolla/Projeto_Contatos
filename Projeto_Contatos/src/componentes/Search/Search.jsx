@@ -1,4 +1,4 @@
-const Search = ({ContatosSearch, setSearch}) => {
+const Search = ({ContatosSearch, setSearch,Contatos }) => {
     return(
     <div className="form-control search-control">
       <input
@@ -17,6 +17,7 @@ const Search = ({ContatosSearch, setSearch}) => {
         <span style={{ transitionDelay: "240ms" }}>s</span>
         <span style={{ transitionDelay: "280ms" }}>a</span>
       </label>
+      <h2>Seus Contatos ({Contatos.length})</h2>
     </div>
     )
 }

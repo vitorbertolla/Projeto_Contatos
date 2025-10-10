@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido, formatarNumber }) => {
+const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido, formatarNumber}) => {
   const [name, setName] = useState("")
   const [number, setNumber] = useState("")
 
