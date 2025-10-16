@@ -10,6 +10,8 @@ import IATraducao from "./componentes/IA/IATraducao";
 import IACreate from "./componentes/IA/IACreate";
 import "./GeneralCSS/theme.css";
 import "./GeneralCSS/global.css";
+import "./componentes/Create/Create.css"
+import "./componentes/Search/Search.css"
 
 
 
@@ -172,6 +174,8 @@ function App() {
           ContatosEdit={ContatosEdit}
           numeroInvalidoCreate={numeroInvalidoCreate}
         />
+      </div>
+      <div className="container-3">
         <Search ContatosSearch={ContatosSearch} 
         setSearch={setSearch} 
         Contatos={Contatos}/>

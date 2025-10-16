@@ -17,10 +17,10 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
 
   return (
     <div className="message-container">
-      <h1>Gerador de Links</h1>
+      <h1>Gerar Link</h1>
       <form onSubmit={Submit}>
 
-  <div className="form-control">
+  <div className="form-control texto_label">
     <textarea
       className="message-input"
       placeholder="Digite sua mensagem"

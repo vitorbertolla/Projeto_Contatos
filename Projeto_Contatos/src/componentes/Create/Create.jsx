@@ -28,8 +28,8 @@ const Create = ({ addContato, numeroInvalidoCreate, ContatosEdit, numeroRepetido
 
   return (
     <div className="container-add">
-      <h1>Agenda de Contatos</h1>
-      <form onSubmit={Submit}>
+      <h1>Criar Contato</h1>
+      <form onSubmit={Submit} className="form_create">
         <div className="form-control">
           <input
             type="text"

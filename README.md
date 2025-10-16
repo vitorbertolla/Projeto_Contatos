@@ -40,6 +40,14 @@ Seu objetivo é **facilitar a comunicação, organização e automação** de in
 
 ---
 
+## **Funcionalidades Extras**
+
+Nossa aplicação combina uma agenda de contatos com um gerador de links de WhatsApp e uma camada de inteligência artificial que permite ao usuário criar e traduzir mensagens automaticamente. A IA é a inovação central: ela transforma o app de uma ferramenta utilitária para um assistente de comunicação, capaz de gerar textos prontos, adaptar tom, sintetizar ideias e traduzir para múltiplos idiomas com qualidade e rapidez.
+
+🧑‍💻 Geração de mensagens: o usuário descreve o objetivo/estilo e a IA produz uma mensagem pronta para ser enviada.
+
+👅 Tradução de mensagens: o usuário fornece um texto (por exemplo: em português) e a IA gera uma tradução natural para inglês, espanhol, francês, alemão, japonês, etc.
+
 ## 🧩 **Como Executar o Projeto Localmente**
 
 ### 1️⃣ Clone o repositório

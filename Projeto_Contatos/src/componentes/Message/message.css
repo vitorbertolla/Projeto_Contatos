@@ -97,6 +97,10 @@
   transform: translateY(0);
 }
 
+.texto_label span{
+  margin-top: 30px;
+}
+
 textarea {
   width: 100%;
   min-height: 80px;
@@ -126,6 +130,6 @@ textarea:focus {
 }
 .form-control textarea:focus + label span,
 .form-control textarea:valid + label span {
-  transform: translateY(-30px);
+  transform: translateY(-60px);
   color: var(--verde-4);
 }
