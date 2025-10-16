@@ -6,7 +6,7 @@
 
 ## 🧠 **Descrição do Projeto**
 
-O **WhatsApp Hub** é uma aplicação web para **gerenciamento de contatos** e **integração com o WhatsApp**, permitindo o envio e recebimento de mensagens em um único painel.
+O **WhatsApp Hub** é uma aplicação web para **gerenciamento de contatos** e **integração com o WhatsApp**, permitindo o envio em um único painel.
 
 Seu objetivo é **facilitar a comunicação, organização e automação** de interações via WhatsApp — ideal para empresas ou usuários que precisam lidar com múltiplos contatos de forma prática e inteligente.
 

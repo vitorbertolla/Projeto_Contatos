@@ -59,11 +59,11 @@ const enviarPrompt = async () => {
 
 
         <select className="ia-select" value={idioma} onChange={(e) => setIdioma(e.target.value)}>
-          <option value="en">Inglês</option>
-          <option value="es">Espanhol</option>
-          <option value="fr">Francês</option>
-          <option value="de">Alemão</option>
-          <option value="ja">Japonês</option>
+          <option value="inglês">Inglês</option>
+          <option value="espanhol">Espanhol</option>
+          <option value="frances">Francês</option>
+          <option value="alemão">Alemão</option>
+          <option value="japones">Japonês</option>
         </select>
 
         <button

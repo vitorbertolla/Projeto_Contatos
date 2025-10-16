@@ -64,8 +64,9 @@ function App() {
     }
 
     // Se for novo contato
-    const numeroExiste = Contatos.some((contato) => contato.number === number);
-    if (numeroExiste) {
+    const numeroExiste = Contatos.some(
+    (contato) => contato.number.replace(/\D/g, "") === number.replace(/\D/g, ""))
+      if (numeroExiste) {
       setNumeroRepetido(true);
       setTimeout(() => setNumeroRepetido(false), 3000);
       return false;
