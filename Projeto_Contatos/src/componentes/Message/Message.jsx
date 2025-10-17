@@ -26,7 +26,6 @@ const Message = ({ enviarMensagem, link, setLink, setNumeroMensagem, numeroMensa
       placeholder="Digite sua mensagem"
       value={mensagem}
       onChange={(e) => setMensagem(e.target.value)}
-      required
     />
     <label>
       <span style={{ transitionDelay: "0ms" }}>M</span>
